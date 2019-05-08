@@ -2,23 +2,39 @@
 
 set -euox pipefail
 
-if [ ! -f ./go.mod ]; then
-  GO11MODULE=on go mod init repro
-fi
+function profile_load() {
+  # - Clear GOFLAGS in case "-mod=vendor" is set.
+  GO111MODULE=on GOFLAGS= go run -v repro.go \
+    -pkgdir tools \
+    -pkgmax 10 \
+    -memprofile mem.prof
+  go tool pprof -top -cum -alloc_space mem.prof > $1.top
+}
 
-# Use a convenient source of packages.
-if [ ! -d ./tools ]; then
-  git clone https://github.com/golang/tools.git
-fi
+function main() {
+  # Use a convenient source of packages.
+  if [ ! -d ./tools ]; then
+    git clone https://github.com/golang/tools.git
+  fi
 
-cd ./tools
+  cd ./tools
 
-# Just to keep it consistent.
-git checkout 2d16b83
+  # Just to keep it consistent.
+  git checkout 2d16b83
 
-# - Clear GOFLAGS in case "-mod=vendor" is set.
-GO111MODULE=on GOFLAGS= go run -v ../repro.go \
-  -pkgdir . \
-  -pkgmax 10 \
-  -memprofile mem.prof \
-  && go tool pprof -top -cum -alloc_space mem.prof
+  cd ../
+
+  # One commit prior to potential regression
+  cp go.mod.45dd101d878 go.mod
+  profile_load 45dd101d87
+
+  # Potential regression commit based on bisect
+  cp go.mod.dbeab5af4b8d go.mod
+  profile_load dbeab5af4b8d
+
+  # Current newest
+  cp go.mod.cf84161cff3f go.mod
+  profile_load cf84161cff3f
+}
+
+main
