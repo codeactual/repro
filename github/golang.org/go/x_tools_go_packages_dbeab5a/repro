@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -euox pipefail
+
+if [ ! -f ./go.mod ]; then
+  GO11MODULE=on go mod init repro
+fi
+
+# Use a convenient source of packages.
+if [ ! -d ./tools ]; then
+  git clone https://github.com/golang/tools.git
+fi
+
+cd ./tools
+
+# Just to keep it consistent.
+git checkout 2d16b83
+
+# - Clear GOFLAGS in case "-mod=vendor" is set.
+GO111MODULE=on GOFLAGS= go run -v ../repro.go \
+  -pkgdir . \
+  -pkgmax 10 \
+  -memprofile mem.prof \
+  && go tool pprof -top -cum -alloc_space mem.prof
