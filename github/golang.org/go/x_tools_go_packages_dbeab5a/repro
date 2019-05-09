@@ -14,7 +14,7 @@ function profile_load() {
 function main() {
   # Use a convenient source of packages.
   if [ ! -d ./tools ]; then
-    git clone https://github.com/golang/tools.git
+    git clone --depth 1 https://github.com/golang/tools.git
   fi
 
   cd ./tools
