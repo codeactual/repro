@@ -1,0 +1,12 @@
+dist: xenial
+
+language: go
+
+go:
+  - 1.12.x
+
+notifications:
+  email: false
+
+script:
+  - echo "reminder: use the 'Trigger build' feature to run specific repro scripts"
