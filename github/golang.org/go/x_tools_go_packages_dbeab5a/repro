@@ -28,6 +28,8 @@ function main() {
   # Current newest
   cp go.mod.cf84161cff3f go.mod
   profile_load cf84161cff3f
+
+  rm go.mod go.sum
 }
 
 main
