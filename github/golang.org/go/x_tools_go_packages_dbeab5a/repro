@@ -26,8 +26,8 @@ function main() {
   profile_load dbeab5af4b8d
 
   # Current newest
-  cp go.mod.cf84161cff3f go.mod
-  profile_load cf84161cff3f
+  cp go.mod.e31d36578abb go.mod
+  profile_load e31d36578abb
 
   rm go.mod go.sum
 }

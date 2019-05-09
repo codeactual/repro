@@ -60,28 +60,27 @@ Dropped 158 nodes (cum <= 13.91MB)
 # Current newest
 
 ```
-: cat cf84161cff3f.top | head -20
+: head -20 e31d36578abb.top
 File: repro
 Type: alloc_space
-Time: May 9, 2019 at 12:04am (UTC)
-Showing nodes accounting for 2675.72MB, 95.78% of 2793.53MB total
-Dropped 165 nodes (cum <= 13.97MB)
+Time: May 9, 2019 at 1:22am (UTC)
+Showing nodes accounting for 2610.92MB, 94.57% of 2760.70MB total
+Dropped 167 nodes (cum <= 13.80MB)
       flat  flat%   sum%        cum   cum%
-         0     0%     0%  1853.25MB 66.34%  go/types.(*Checker).checkFiles
-         0     0%     0%  1832.76MB 65.61%  go/types.(*Checker).Files
-         0     0%     0%  1804.23MB 64.59%  golang.org/x/tools/go/packages.(*loader).loadPackage
-         0     0%     0%  1792.70MB 64.17%  golang.org/x/tools/go/packages.(*loader).loadRecursive.func1
-         0     0%     0%  1762.17MB 63.08%  sync.(*Once).Do
-         0     0%     0%  1734.12MB 62.08%  golang.org/x/tools/go/packages.(*loader).loadRecursive
-         0     0%     0%  1704.61MB 61.02%  golang.org/x/tools/go/packages.(*loader).loadRecursive.func1.1
-         0     0%     0%  1390.45MB 49.77%  go/types.(*Checker).rawExpr
-         0     0%     0%  1273.83MB 45.60%  go/types.(*Checker).multiExpr
-   14.50MB  0.52%  0.52%  1271.30MB 45.51%  go/types.(*Checker).stmt
-         0     0%  0.52%  1268.72MB 45.42%  go/types.(*Checker).stmtList
-    2.10MB 0.075%  0.59%  1248.86MB 44.71%  go/types.(*Checker).exprInternal
-         0     0%  0.59%  1200.02MB 42.96%  go/types.(*Checker).funcBody
-         0     0%  0.59%  1161.72MB 41.59%  go/types.(*Checker).funcDecl.func1
-
+         0     0%     0%  1846.72MB 66.89%  go/types.(*Checker).checkFiles
+         0     0%     0%  1822.69MB 66.02%  go/types.(*Checker).Files
+    0.50MB 0.018% 0.018%  1790.19MB 64.85%  golang.org/x/tools/go/packages.(*loader).loadPackage
+         0     0% 0.018%  1774.66MB 64.28%  golang.org/x/tools/go/packages.(*loader).loadRecursive.func1
+         0     0% 0.018%  1746.55MB 63.26%  sync.(*Once).Do
+         0     0% 0.018%  1714.51MB 62.10%  golang.org/x/tools/go/packages.(*loader).loadRecursive
+         0     0% 0.018%  1691.43MB 61.27%  golang.org/x/tools/go/packages.(*loader).loadRecursive.func1.1
+         0     0% 0.018%  1389.83MB 50.34%  go/types.(*Checker).rawExpr
+         0     0% 0.018%  1284.40MB 46.52%  go/types.(*Checker).multiExpr
+      21MB  0.76%  0.78%  1269.81MB 46.00%  go/types.(*Checker).stmt
+         0     0%  0.78%  1266.73MB 45.88%  go/types.(*Checker).stmtList
+    2.60MB 0.094%  0.87%  1254.36MB 45.44%  go/types.(*Checker).exprInternal
+         0     0%  0.87%  1195.09MB 43.29%  go/types.(*Checker).funcBody
+         0     0%  0.87%  1155.35MB 41.85%  go/types.(*Checker).funcDecl.func1
 ```
 
 # My results (on Travis CI)
@@ -98,5 +97,5 @@ script:
   - ./repro
   - head -20 45dd101d8784.top
   - head -20 dbeab5af4b8d.top
-  - head -20 cf84161cff3f.top
+  - head -20 e31d36578abb.top
 ```
