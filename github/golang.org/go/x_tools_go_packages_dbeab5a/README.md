@@ -3,7 +3,7 @@
 - Clone this repository to a location outside `GOPATH`.
 - Run the `repro` bash script. It should clone `x/tools`, run `repro.go` which consumes `10` packages in `x/tools`, then display the memory profile from `go tool pprof`.
 
-# My results
+# My results (local)
 
 One commit prior to potential regression:
 
@@ -82,4 +82,21 @@ Dropped 165 nodes (cum <= 13.97MB)
          0     0%  0.59%  1200.02MB 42.96%  go/types.(*Checker).funcBody
          0     0%  0.59%  1161.72MB 41.59%  go/types.(*Checker).funcDecl.func1
 
+```
+
+# My results (on Travis CI)
+
+https://travis-ci.org/codeactual/repro/builds/530055112#L355
+
+# Travis config
+
+> For one-off build:
+
+```
+script:
+  - cd github/golang.org/go/x_tools_go_packages_dbeab5a
+  - ./repro
+  - head -20 45dd101d8784.top
+  - head -20 dbeab5af4b8d.top
+  - head -20 cf84161cff3f.top
 ```
