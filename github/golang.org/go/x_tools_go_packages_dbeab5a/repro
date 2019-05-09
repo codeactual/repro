@@ -17,13 +17,6 @@ function main() {
     git clone --depth 1 https://github.com/golang/tools.git
   fi
 
-  cd ./tools
-
-  # Just to keep it consistent.
-  git checkout 2d16b83
-
-  cd ../
-
   # One commit prior to potential regression
   cp go.mod.45dd101d8784 go.mod
   profile_load 45dd101d8784
