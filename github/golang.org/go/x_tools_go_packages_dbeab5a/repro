@@ -25,8 +25,8 @@ function main() {
   cd ../
 
   # One commit prior to potential regression
-  cp go.mod.45dd101d878 go.mod
-  profile_load 45dd101d87
+  cp go.mod.45dd101d8784 go.mod
+  profile_load 45dd101d8784
 
   # Potential regression commit based on bisect
   cp go.mod.dbeab5af4b8d go.mod
